@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+AutoUpdate-Show-In-Client: true
+OpenIDE-Module: org.gamemonkey
+OpenIDE-Module-Layer: org/gamemonkey/layer.xml
+OpenIDE-Module-Localizing-Bundle: org/gamemonkey/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+

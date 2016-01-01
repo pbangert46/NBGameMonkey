@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.2//EN" "http://www.netbeans.org/dtds/filesystem-1_2.dtd">
+<filesystem>
+    <folder name="Editors">
+        <folder name="text">
+            <folder name="x-gamemonkey">
+                <attr name="SystemFileSystem.localizingBundle" stringvalue="org.gamemonkey.Bundle"/>
+                <folder name="FontsColors">
+                    <folder name="NetBeans">
+                        <folder name="Defaults">
+                            <file name="FontAndColors.xml" url="FontAndColors.xml">
+                                <attr name="SystemFileSystem.localizingBundle" stringvalue="org.gamemonkey.Bundle"/>
+                            </file>
+                        </folder>
+                    </folder>
+                </folder>
+                <file name="org-gamemonkey-parser-GMParserFactory.instance"/>
+                <file name="org-gamemonkey-parser-SyntaxErrorsHighlightingTaskFactory.instance"/>
+                <file name="org-gamemonkey-parser-GMIndentTaskFactory.instance"/>
+                <file name="language.instance">
+                    <attr name="instanceCreate" methodvalue="org.gamemonkey.lexer.GMTokenId.getLanguage"/>
+                    <attr name="instanceOf" stringvalue="org.netbeans.api.lexer.Language"/>
+                </file>
+            </folder>
+        </folder>
+    </folder>
+</filesystem>
