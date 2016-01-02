@@ -87,7 +87,7 @@ public interface GameMonkeyLexerConstants {
   /** RegularExpression Id. */
   int LETTER = 46;
   /** RegularExpression Id. */
-  int PART_LETTER = 47;
+  int DIGIT = 47;
   /** RegularExpression Id. */
   int LPAREN = 48;
   /** RegularExpression Id. */
@@ -241,7 +241,7 @@ public interface GameMonkeyLexerConstants {
     "<STRING_LITERAL>",
     "<IDENTIFIER>",
     "<LETTER>",
-    "<PART_LETTER>",
+    "<DIGIT>",
     "\"(\"",
     "\")\"",
     "\"{\"",
