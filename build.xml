@@ -5,27 +5,23 @@
 <project name="org.gamemonkey" default="netbeans" basedir=".">
     <description>Builds, tests, and runs the project org.gamemonkey.</description>
     <import file="nbproject/build-impl.xml"/>
-    <target name="lexer">
-        <echo>Generating lexer (It's ok to ignore errors about obsolete files - I've modified them)...</echo>
-        <javacc 
-            target="src\org\gamemonkey\jcc\lexer\GameMonkey.jj"
-            javacchome="C:\wamp\www\javacc-5.0\bin\lib\"
-        />
-    </target>
+    
     <target name="parser">
-        <echo>Generating parser (It's ok to ignore errors about obsolete files - I've modified them)...</echo>
+        <echo>Generating lexer/parser...</echo>
         <echo>JJTree...</echo>
         <jjtree 
             target="src\org\gamemonkey\jcc\parser\GameMonkey.jjt"
             javacchome="C:\wamp\www\javacc-5.0\bin\lib\"
-            outputfile="src\org\gamemonkey\jcc\parser\GameMonkey.jj"
+            outputfile="GameMonkey.jj"
+            outputdirectory="c:\wamp\www\NBGameMonkey\src\org\gamemonkey\jcc\parser\"
         />
         <echo>JavaCC...</echo>
         <javacc 
             target="src\org\gamemonkey\jcc\parser\GameMonkey.jj"
             javacchome="C:\wamp\www\javacc-5.0\bin\lib\"
+            outputdirectory="c:\wamp\www\NBGameMonkey\src\org\gamemonkey\jcc\parser\"
         />
     </target>
-    <target name="init" depends="basic-init,files-init,build-init,-javac-init,lexer,parser"/>
+    <target name="init" depends="basic-init,files-init,build-init,-javac-init,parser"/>
     
 </project>

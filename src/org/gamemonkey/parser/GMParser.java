@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package org.gamemonkey.parser;
 
@@ -53,7 +49,7 @@ public class GMParser extends Parser {
 
     public static class GMParserResult extends Result {
 
-        private GameMonkeyParser javaParser;
+        private final GameMonkeyParser javaParser;
         private boolean valid = true;
 
         GMParserResult (Snapshot snapshot, GameMonkeyParser javaParser) {

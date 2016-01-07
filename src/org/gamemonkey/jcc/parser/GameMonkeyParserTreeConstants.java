@@ -4,16 +4,36 @@ package org.gamemonkey.jcc.parser;
 public interface GameMonkeyParserTreeConstants
 {
   public int JJTCOMPILATIONUNIT = 0;
-  public int JJTMODIFIERS = 1;
-  public int JJTNAME = 2;
-  public int JJTNAMELIST = 3;
+  public int JJTEXPRESSION = 1;
+  public int JJTVARIABLE = 2;
+  public int JJTCOMMAND = 3;
+  public int JJTCOMMANDARGS = 4;
+  public int JJTCOMMANDARG = 5;
+  public int JJTASSIGNMENT = 6;
+  public int JJTFUNCTIONDEFINITION = 7;
+  public int JJTBLOCK = 8;
+  public int JJTSCOPELESSASSIGNMENT = 9;
+  public int JJTDEFININGARGS = 10;
+  public int JJTSCOPE = 11;
+  public int JJTASSIGNOPERATOR = 12;
+  public int JJTLITERAL = 13;
 
 
   public String[] jjtNodeName = {
     "CompilationUnit",
-    "Modifiers",
-    "Name",
-    "NameList",
+    "Expression",
+    "Variable",
+    "Command",
+    "CommandArgs",
+    "CommandArg",
+    "Assignment",
+    "FunctionDefinition",
+    "Block",
+    "ScopelessAssignment",
+    "DefiningArgs",
+    "Scope",
+    "AssignOperator",
+    "Literal",
   };
 }
-/* JavaCC - OriginalChecksum=58d7e1dc4354e25b6a64d17633b43d35 (do not edit this line) */
+/* JavaCC - OriginalChecksum=5aca07f2e9ace3a8b26d9fcd92d0db07 (do not edit this line) */
