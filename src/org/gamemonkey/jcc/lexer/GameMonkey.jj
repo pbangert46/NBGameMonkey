@@ -1,0 +1,267 @@
+
+options{
+STATIC=false;
+BUILD_PARSER=false;
+}
+
+
+PARSER_BEGIN(GameMonkeyLexer)
+
+package org.gamemonkey.jcc.lexer;
+
+import java.io.*;
+import java.util.*;
+
+/**
+ * Grammar to parse Game Monkey version 1.5
+ */
+public class GameMonkeyLexer{}
+
+
+PARSER_END(GameMonkeyLexer)
+
+/* WHITE SPACE */
+
+/* WHITE SPACE */
+
+TOKEN :
+{
+  < WHITESPACE:
+    " "
+  | "\t"
+  | "\n"
+  | "\r"
+  | "\f" >
+}
+
+/* COMMENTS */
+
+MORE :
+{
+  "//" : IN_SINGLE_LINE_COMMENT
+|
+  <"/**" ~["/"]> { input_stream.backup(1); } : IN_FORMAL_COMMENT
+|
+  "/*" : IN_MULTI_LINE_COMMENT
+}
+
+<IN_SINGLE_LINE_COMMENT>
+TOKEN :
+{
+  <SINGLE_LINE_COMMENT: "\n" | "\r" | "\r\n" > : DEFAULT
+}
+
+<IN_FORMAL_COMMENT>
+TOKEN :
+{
+  <FORMAL_COMMENT: "*/" > : DEFAULT
+}
+
+<IN_MULTI_LINE_COMMENT>
+TOKEN :
+{
+  <MULTI_LINE_COMMENT: "*/" > : DEFAULT
+}
+
+<IN_SINGLE_LINE_COMMENT,IN_FORMAL_COMMENT,IN_MULTI_LINE_COMMENT>
+MORE :
+{
+  < ~[] >
+}
+
+/* RESERVED WORDS AND LITERALS */
+
+TOKEN :
+{
+  < GLOBAL: "global" >
+| < LOCAL: "Local" >
+| < MEMBER: "member" >
+| < FUNCTION: "function" >
+| < THIS: "this" >
+| < DOSTRING: "dostring" >
+| < TABLE: "table" >
+| < IF: "if" >
+| < ELSE: "else" >
+| < FOR: "for" >
+| < FOREACH: "foreach" >
+| < WHILE: "while" >
+| < DOWHILE: "dowhile" >
+| < BREAK: "break" >
+| < CONTINUE: "continue" >
+| < RETURN: "return" >
+| < TRUE: "true" >
+| < FALSE: "false" >
+| < NULL: "null" >
+| < PRINT: "print" >
+| < THREAD: "thread" >
+| < YIELD: "yield" >
+}
+
+/* LITERALS */
+
+TOKEN :
+{
+  < INTEGER_LITERAL:
+        <DECIMAL_LITERAL> (["l","L"])?
+      | <HEX_LITERAL> (["l","L"])?
+      | <OCTAL_LITERAL> (["l","L"])?
+  >
+|
+  < #DECIMAL_LITERAL: ["1"-"9"] (["0"-"9"])* >
+|
+  < #HEX_LITERAL: "0" ["x","X"] (["0"-"9","a"-"f","A"-"F"])+ >
+|
+  < #OCTAL_LITERAL: "0" (["0"-"7"])* >
+|
+  < FLOATING_POINT_LITERAL:
+        <DECIMAL_FLOATING_POINT_LITERAL>
+      | <HEXADECIMAL_FLOATING_POINT_LITERAL>
+  >
+|
+  < #DECIMAL_FLOATING_POINT_LITERAL:
+        (["0"-"9"])+ "." (["0"-"9"])* (<DECIMAL_EXPONENT>)? (["f","F","d","D"])?
+      | "." (["0"-"9"])+ (<DECIMAL_EXPONENT>)? (["f","F","d","D"])?
+      | (["0"-"9"])+ <DECIMAL_EXPONENT> (["f","F","d","D"])?
+      | (["0"-"9"])+ (<DECIMAL_EXPONENT>)? ["f","F","d","D"]
+  >
+|
+  < #DECIMAL_EXPONENT: ["e","E"] (["+","-"])? (["0"-"9"])+ >
+|
+  < #HEXADECIMAL_FLOATING_POINT_LITERAL:
+        "0" ["x", "X"] (["0"-"9","a"-"f","A"-"F"])+ (".")? <HEXADECIMAL_EXPONENT> (["f","F","d","D"])?
+      | "0" ["x", "X"] (["0"-"9","a"-"f","A"-"F"])* "." (["0"-"9","a"-"f","A"-"F"])+ <HEXADECIMAL_EXPONENT> (["f","F","d","D"])?
+  >
+|
+  < #HEXADECIMAL_EXPONENT: ["p","P"] (["+","-"])? (["0"-"9"])+ >
+|
+  < CHARACTER_LITERAL:
+      "'"
+      (   (~["'","\\","\n","\r"])
+        | ("\\"
+            ( ["n","t","b","r","f","\\","'","\""]
+            | ["0"-"7"] ( ["0"-"7"] )?
+            | ["0"-"3"] ["0"-"7"] ["0"-"7"]
+            )
+          )
+      )
+      "'"
+  >
+|
+  < STRING_LITERAL:
+      "\""
+      (   (~["\"","\\","\n","\r"])
+        | ("\\"
+            ( ["n","t","b","r","f","\\","'","\""]
+            | ["0"-"7"] ( ["0"-"7"] )?
+            | ["0"-"3"] ["0"-"7"] ["0"-"7"]
+            )
+          )
+      )*
+      "\""
+  >
+}
+
+/* IDENTIFIERS */
+
+TOKEN :
+{
+  < IDENTIFIER: <LETTER> (<LETTER>|<DIGIT>|<OTHER>)* >
+|
+  < #LETTER:
+      [
+       "A"-"Z",
+       "a"-"z"
+      ]
+  >
+|
+  < #DIGIT:
+      [
+        "0"-"9"
+      ]
+  >
+|
+  < #OTHER:
+      [
+        "_"
+      ]
+  >
+}
+
+/* SEPARATORS */
+
+TOKEN :
+{
+  < LPAREN: "(" >
+| < RPAREN: ")" >
+| < LBRACE: "{" >
+| < RBRACE: "}" >
+| < LBRACKET: "[" >
+| < RBRACKET: "]" >
+| < SEMICOLON: ";" >
+| < COMMA: "," >
+| < DOT: "." >
+| < AT: "@" >
+}
+
+/* OPERATORS */
+
+TOKEN :
+{
+  < ASSIGN: "=" >
+| < LT: "<" >
+| < BANG: "!" >
+| < TILDE: "~" >
+| < HOOK: "?" >
+| < COLON: ":" >
+| < EQ: "==" >
+| < LE: "<=" >
+| < GE: ">=" >
+| < NE: "!=" >
+| < SC_OR: "||" >
+| < SC_AND: "&&" >
+| < INCR: "++" >
+| < DECR: "--" >
+| < PLUS: "+" >
+| < MINUS: "-" >
+| < STAR: "*" >
+| < SLASH: "/" >
+| < BIT_AND: "&" >
+| < BIT_OR: "|" >
+| < XOR: "^" >
+| < REM: "%" >
+| < LSHIFT: "<<" >
+| < PLUSASSIGN: "+=" >
+| < MINUSASSIGN: "-=" >
+| < STARASSIGN: "*=" >
+| < SLASHASSIGN: "/=" >
+| < ANDASSIGN: "&=" >
+| < ORASSIGN: "|=" >
+| < XORASSIGN: "^=" >
+| < REMASSIGN: "%=" >
+| < LSHIFTASSIGN: "<<=" >
+| < RSIGNEDSHIFTASSIGN: ">>=" >
+| < RUNSIGNEDSHIFTASSIGN: ">>>=" >
+| < ELLIPSIS: "..." >
+}
+
+/* >'s need special attention due to generics syntax. */
+TOKEN :
+{
+  < RUNSIGNEDSHIFT: ">>>" >
+  {
+     matchedToken.kind = GT;
+     ((Token)matchedToken).kind = RUNSIGNEDSHIFT;
+     input_stream.backup(2);
+     matchedToken.image = ">";
+  }
+| < RSIGNEDSHIFT: ">>" >
+  {
+     matchedToken.kind = GT;
+     ((Token)matchedToken).kind = RSIGNEDSHIFT;
+     input_stream.backup(1);
+     matchedToken.image = ">";
+  }
+| < GT: ">" >
+}
+
+

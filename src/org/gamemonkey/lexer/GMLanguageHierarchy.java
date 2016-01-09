@@ -256,6 +256,9 @@ public class GMLanguageHierarchy extends LanguageHierarchy<GMTokenId> {
                    /** RegularExpression Id. */
                    new GMTokenId("GT", "operator", 122),
                      /** Lexical state. */
+                    new GMTokenId("GLOBAL", "operator", 123),
+                    new GMTokenId("LOCAL", "OPERATOR", 124),
+                    new GMTokenId("MEMBER", "Operator", 125),
 
                });
        idToToken = new HashMap<Integer, GMTokenId>();
@@ -271,6 +274,7 @@ public class GMLanguageHierarchy extends LanguageHierarchy<GMTokenId> {
        return idToToken.get(id);
    }
 
+   @Override
    protected synchronized Collection<GMTokenId> createTokenIds() {
        if (tokens == null) {
            init();
@@ -278,11 +282,14 @@ public class GMLanguageHierarchy extends LanguageHierarchy<GMTokenId> {
        return tokens;
    }
 
+   @Override
    protected synchronized Lexer<GMTokenId> createLexer(LexerRestartInfo<GMTokenId> info) {
        return new GMLexer(info);
    }
 
+   
+   @Override
    protected String mimeType() {
-       return "text/x-gm";
+       return "text/x-gamemonkey";
    }
 }

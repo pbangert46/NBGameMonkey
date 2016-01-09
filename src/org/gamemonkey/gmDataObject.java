@@ -97,7 +97,6 @@ public class gmDataObject extends MultiDataObject {
     public gmDataObject(FileObject pf, MultiFileLoader loader) throws DataObjectExistsException, IOException {
         super(pf, loader);
         registerEditor("text/x-gamemonkey", false);
-        
     }
 
     @Override
@@ -113,10 +112,7 @@ public class gmDataObject extends MultiDataObject {
                 getLookup()); 
     }
     
-    @Override
-    public Lookup getLookup() {
-        return getCookieSet().getLookup();
-    }
+    
     
     private static class GmChildFactory extends ChildFactory<String> 
     { 

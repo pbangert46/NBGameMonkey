@@ -38,16 +38,38 @@ class SyntaxErrorsHighlightingTask extends ParserResultTask {
         try {
             GMParserResult gmResult = (GMParserResult) result;
             List<ParseException> syntaxErrors = gmResult.getJavaParser ().syntaxErrors;
-            //Document document = result.getSnapshot ().getSource ().getDocument (false);
             org.netbeans.modules.parsing.api.Snapshot s = result.getSnapshot();
             org.netbeans.modules.parsing.api.Source src = s.getSource();
             Document document = src.getDocument(false);
             
             List<ErrorDescription> errors = new ArrayList<ErrorDescription> ();
             for (ParseException syntaxError : syntaxErrors) {
+
                 Token token = syntaxError.currentToken;
-                int start = NbDocument.findLineOffset ((StyledDocument) document, token.beginLine) + token.beginColumn;
-                int end = NbDocument.findLineOffset ((StyledDocument) document, token.endLine) + token.endColumn;
+                
+                System.out.print(
+                        "error token: " + token
+                        + " - HL line/col [" 
+                            + token.beginLine + "-" 
+                            + token.endLine 
+                            + "/" 
+                            + token.beginColumn + "-" 
+                            + token.endColumn 
+                            + "]"
+                        + "\n");
+                
+                System.out.print("syn error: " + syntaxError + "\n");
+                
+                int start = NbDocument.findLineOffset ((StyledDocument) document, (token.beginLine>0?token.beginLine-1:0));
+                int end = NbDocument.findLineOffset ((StyledDocument) document, (token.endLine>0?token.endLine-1:0));
+    
+//                System.out.print("errHL: " + start + "-" + end + "\n");
+    
+                start += token.beginColumn;
+                end += token.endColumn;
+                
+//                System.out.print("errHL+Col: " + start + "-" + end + "\n");
+                
                 ErrorDescription errorDescription = ErrorDescriptionFactory.createErrorDescription (
                     Severity.ERROR,
                     syntaxError.getMessage (),

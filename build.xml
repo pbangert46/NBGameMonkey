@@ -9,17 +9,22 @@
     <target name="parser">
         <echo>Generating lexer/parser...</echo>
         <echo>JJTree...</echo>
-        <jjtree 
+        <jjtree
             target="src\org\gamemonkey\jcc\parser\GameMonkey.jjt"
             javacchome="C:\wamp\www\javacc-5.0\bin\lib\"
             outputfile="GameMonkey.jj"
             outputdirectory="c:\wamp\www\NBGameMonkey\src\org\gamemonkey\jcc\parser\"
         />
         <echo>JavaCC...</echo>
-        <javacc 
+        <javacc
             target="src\org\gamemonkey\jcc\parser\GameMonkey.jj"
             javacchome="C:\wamp\www\javacc-5.0\bin\lib\"
             outputdirectory="c:\wamp\www\NBGameMonkey\src\org\gamemonkey\jcc\parser\"
+        />
+        <javacc
+            target="src\org\gamemonkey\jcc\lexer\GameMonkey.jj"
+            javacchome="C:\wamp\www\javacc-5.0\bin\lib\"
+            outputdirectory="c:\wamp\www\NBGameMonkey\src\org\gamemonkey\jcc\lexer\"
         />
     </target>
     <target name="init" depends="basic-init,files-init,build-init,-javac-init,parser"/>

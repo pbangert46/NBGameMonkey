@@ -7,12 +7,12 @@ public interface GameMonkeyParserTreeConstants
   public int JJTEXPRESSION = 1;
   public int JJTVARIABLE = 2;
   public int JJTCOMMAND = 3;
-  public int JJTCOMMANDARGS = 4;
-  public int JJTCOMMANDARG = 5;
-  public int JJTASSIGNMENT = 6;
-  public int JJTFUNCTIONDEFINITION = 7;
-  public int JJTBLOCK = 8;
-  public int JJTSCOPELESSASSIGNMENT = 9;
+  public int JJTASSIGNMENT = 4;
+  public int JJTFUNCTIONDEFINITION = 5;
+  public int JJTBLOCK = 6;
+  public int JJTSCOPELESSASSIGNMENT = 7;
+  public int JJTVALIDASSIGNMENTS = 8;
+  public int JJTVALIDASSIGNMENT = 9;
   public int JJTDEFININGARGS = 10;
   public int JJTSCOPE = 11;
   public int JJTASSIGNOPERATOR = 12;
@@ -24,16 +24,16 @@ public interface GameMonkeyParserTreeConstants
     "Expression",
     "Variable",
     "Command",
-    "CommandArgs",
-    "CommandArg",
     "Assignment",
     "FunctionDefinition",
     "Block",
     "ScopelessAssignment",
+    "ValidAssignments",
+    "ValidAssignment",
     "DefiningArgs",
     "Scope",
     "AssignOperator",
     "Literal",
   };
 }
-/* JavaCC - OriginalChecksum=5aca07f2e9ace3a8b26d9fcd92d0db07 (do not edit this line) */
+/* JavaCC - OriginalChecksum=12288a60c7921926efbed7850df0b0b1 (do not edit this line) */

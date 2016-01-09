@@ -383,36 +383,13 @@ void Expression():
 void Variable():
 {}
 {
-    <IDENTIFIER> ("." <IDENTIFIER>)?
+    <IDENTIFIER> (<DOT> <IDENTIFIER>)?
 }
 
 void Command():
 {}
 {
-    Variable() "(" CommandArgs() ")"
-}
-
-void CommandArgs():
-{}
-{
-    CommandArg() ( "," CommandArg() )*
-}
-
-void CommandArg():
-{}
-{
-    Literal()
-    |
-    (
-        LOOKAHEAD(2)
-        ScopelessAssignment()
-        | 
-        (
-            LOOKAHEAD(4)
-            Command()
-            | Variable()
-        )
-    )
+    Variable() "(" ValidAssignments() ")"
 }
 
 void Assignment():
@@ -425,7 +402,7 @@ void Assignment():
 void FunctionDefinition():
 {}
 {
-    <FUNCTION> "(" ( Variable() ( "," Variable() )* )* ")" Block()
+    <FUNCTION> "(" ( Variable() ( <COMMA> Variable() )* )* ")" Block()
 }
 
 void Block():
@@ -437,17 +414,29 @@ void Block():
 void ScopelessAssignment():
 {}
 {
-    <IDENTIFIER> AssignOperator()
+    <IDENTIFIER> AssignOperator() ValidAssignments()
+}
+
+void ValidAssignments():
+{}
+{
+    //foo() + bar() + (foo() + "hi" + 2 + 5.4 + function(){} + {"hi"}, "hmm")
+    ValidAssignment()
+    | "(" ( ValidAssignments() )? ")"
+
+}
+
+void ValidAssignment():
+{}
+{
+    Literal()
+    | "{" DefiningArgs() "}"
+    | FunctionDefinition()
+    | 
     (
-        Literal()
-        | "{" DefiningArgs() "}"
-        | FunctionDefinition()
-        | 
-        (
-            LOOKAHEAD(4)
-            Command()
-            | Variable()
-        )
+        LOOKAHEAD(4)
+        Command()
+        | Variable()
     )
 }
 

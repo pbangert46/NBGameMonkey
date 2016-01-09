@@ -236,115 +236,8 @@ public class GameMonkeyParser/*@bgen(jjtree)*/implements GameMonkeyParserTreeCon
     try {
       Variable();
       jj_consume_token(LPAREN);
-      CommandArgs();
+      ValidAssignments();
       jj_consume_token(RPAREN);
-    } catch (Throwable jjte000) {
-      if (jjtc000) {
-        jjtree.clearNodeScope(jjtn000);
-        jjtc000 = false;
-      } else {
-        jjtree.popNode();
-      }
-      if (jjte000 instanceof RuntimeException) {
-        {if (true) throw (RuntimeException)jjte000;}
-      }
-      if (jjte000 instanceof ParseException) {
-        {if (true) throw (ParseException)jjte000;}
-      }
-      {if (true) throw (Error)jjte000;}
-    } finally {
-      if (jjtc000) {
-        jjtree.closeNodeScope(jjtn000, true);
-      }
-    }
-  }
-
-  final public void CommandArgs() throws ParseException {
- /*@bgen(jjtree) CommandArgs */
-  SimpleNode jjtn000 = new SimpleNode(JJTCOMMANDARGS);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-    try {
-      CommandArg();
-      label_2:
-      while (true) {
-        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case COMMA:
-          ;
-          break;
-        default:
-          jj_la1[4] = jj_gen;
-          break label_2;
-        }
-        jj_consume_token(COMMA);
-        CommandArg();
-      }
-    } catch (Throwable jjte000) {
-      if (jjtc000) {
-        jjtree.clearNodeScope(jjtn000);
-        jjtc000 = false;
-      } else {
-        jjtree.popNode();
-      }
-      if (jjte000 instanceof RuntimeException) {
-        {if (true) throw (RuntimeException)jjte000;}
-      }
-      if (jjte000 instanceof ParseException) {
-        {if (true) throw (ParseException)jjte000;}
-      }
-      {if (true) throw (Error)jjte000;}
-    } finally {
-      if (jjtc000) {
-        jjtree.closeNodeScope(jjtn000, true);
-      }
-    }
-  }
-
-  final public void CommandArg() throws ParseException {
- /*@bgen(jjtree) CommandArg */
-  SimpleNode jjtn000 = new SimpleNode(JJTCOMMANDARG);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-    try {
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case INTEGER_LITERAL:
-      case FLOATING_POINT_LITERAL:
-      case CHARACTER_LITERAL:
-      case STRING_LITERAL:
-        Literal();
-        break;
-      case IDENTIFIER:
-        if (jj_2_3(2)) {
-          ScopelessAssignment();
-        } else {
-          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-          case IDENTIFIER:
-            if (jj_2_2(4)) {
-              Command();
-            } else {
-              switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-              case IDENTIFIER:
-                Variable();
-                break;
-              default:
-                jj_la1[5] = jj_gen;
-                jj_consume_token(-1);
-                throw new ParseException();
-              }
-            }
-            break;
-          default:
-            jj_la1[6] = jj_gen;
-            jj_consume_token(-1);
-            throw new ParseException();
-          }
-        }
-        break;
-      default:
-        jj_la1[7] = jj_gen;
-        jj_consume_token(-1);
-        throw new ParseException();
-      }
     } catch (Throwable jjte000) {
       if (jjtc000) {
         jjtree.clearNodeScope(jjtn000);
@@ -379,7 +272,7 @@ public class GameMonkeyParser/*@bgen(jjtree)*/implements GameMonkeyParserTreeCon
         Scope();
         break;
       default:
-        jj_la1[8] = jj_gen;
+        jj_la1[4] = jj_gen;
         ;
       }
       ScopelessAssignment();
@@ -412,26 +305,26 @@ public class GameMonkeyParser/*@bgen(jjtree)*/implements GameMonkeyParserTreeCon
     try {
       jj_consume_token(FUNCTION);
       jj_consume_token(LPAREN);
-      label_3:
+      label_2:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case IDENTIFIER:
           ;
           break;
         default:
-          jj_la1[9] = jj_gen;
-          break label_3;
+          jj_la1[5] = jj_gen;
+          break label_2;
         }
         Variable();
-        label_4:
+        label_3:
         while (true) {
           switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
           case COMMA:
             ;
             break;
           default:
-            jj_la1[10] = jj_gen;
-            break label_4;
+            jj_la1[6] = jj_gen;
+            break label_3;
           }
           jj_consume_token(COMMA);
           Variable();
@@ -467,7 +360,7 @@ public class GameMonkeyParser/*@bgen(jjtree)*/implements GameMonkeyParserTreeCon
   jjtree.openNodeScope(jjtn000);
     try {
       jj_consume_token(LBRACE);
-      label_5:
+      label_4:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case GLOBAL:
@@ -478,8 +371,8 @@ public class GameMonkeyParser/*@bgen(jjtree)*/implements GameMonkeyParserTreeCon
           ;
           break;
         default:
-          jj_la1[11] = jj_gen;
-          break label_5;
+          jj_la1[7] = jj_gen;
+          break label_4;
         }
         Expression();
       }
@@ -513,6 +406,95 @@ public class GameMonkeyParser/*@bgen(jjtree)*/implements GameMonkeyParserTreeCon
     try {
       jj_consume_token(IDENTIFIER);
       AssignOperator();
+      ValidAssignments();
+    } catch (Throwable jjte000) {
+      if (jjtc000) {
+        jjtree.clearNodeScope(jjtn000);
+        jjtc000 = false;
+      } else {
+        jjtree.popNode();
+      }
+      if (jjte000 instanceof RuntimeException) {
+        {if (true) throw (RuntimeException)jjte000;}
+      }
+      if (jjte000 instanceof ParseException) {
+        {if (true) throw (ParseException)jjte000;}
+      }
+      {if (true) throw (Error)jjte000;}
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+  }
+
+  final public void ValidAssignments() throws ParseException {
+ /*@bgen(jjtree) ValidAssignments */
+  SimpleNode jjtn000 = new SimpleNode(JJTVALIDASSIGNMENTS);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+    try {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case FUNCTION:
+      case INTEGER_LITERAL:
+      case FLOATING_POINT_LITERAL:
+      case CHARACTER_LITERAL:
+      case STRING_LITERAL:
+      case IDENTIFIER:
+      case LBRACE:
+        ValidAssignment();
+        break;
+      case LPAREN:
+        jj_consume_token(LPAREN);
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case FUNCTION:
+        case INTEGER_LITERAL:
+        case FLOATING_POINT_LITERAL:
+        case CHARACTER_LITERAL:
+        case STRING_LITERAL:
+        case IDENTIFIER:
+        case LPAREN:
+        case LBRACE:
+          ValidAssignments();
+          break;
+        default:
+          jj_la1[8] = jj_gen;
+          ;
+        }
+        jj_consume_token(RPAREN);
+        break;
+      default:
+        jj_la1[9] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+    } catch (Throwable jjte000) {
+      if (jjtc000) {
+        jjtree.clearNodeScope(jjtn000);
+        jjtc000 = false;
+      } else {
+        jjtree.popNode();
+      }
+      if (jjte000 instanceof RuntimeException) {
+        {if (true) throw (RuntimeException)jjte000;}
+      }
+      if (jjte000 instanceof ParseException) {
+        {if (true) throw (ParseException)jjte000;}
+      }
+      {if (true) throw (Error)jjte000;}
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+  }
+
+  final public void ValidAssignment() throws ParseException {
+ /*@bgen(jjtree) ValidAssignment */
+  SimpleNode jjtn000 = new SimpleNode(JJTVALIDASSIGNMENT);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+    try {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case INTEGER_LITERAL:
       case FLOATING_POINT_LITERAL:
@@ -529,7 +511,7 @@ public class GameMonkeyParser/*@bgen(jjtree)*/implements GameMonkeyParserTreeCon
         FunctionDefinition();
         break;
       case IDENTIFIER:
-        if (jj_2_4(4)) {
+        if (jj_2_2(4)) {
           Command();
         } else {
           switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -537,14 +519,14 @@ public class GameMonkeyParser/*@bgen(jjtree)*/implements GameMonkeyParserTreeCon
             Variable();
             break;
           default:
-            jj_la1[12] = jj_gen;
+            jj_la1[10] = jj_gen;
             jj_consume_token(-1);
             throw new ParseException();
           }
         }
         break;
       default:
-        jj_la1[13] = jj_gen;
+        jj_la1[11] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -581,15 +563,15 @@ public class GameMonkeyParser/*@bgen(jjtree)*/implements GameMonkeyParserTreeCon
       case MEMBER:
       case IDENTIFIER:
         Assignment();
-        label_6:
+        label_5:
         while (true) {
           switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
           case COMMA:
             ;
             break;
           default:
-            jj_la1[14] = jj_gen;
-            break label_6;
+            jj_la1[12] = jj_gen;
+            break label_5;
           }
           jj_consume_token(COMMA);
           switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -600,13 +582,13 @@ public class GameMonkeyParser/*@bgen(jjtree)*/implements GameMonkeyParserTreeCon
             Assignment();
             break;
           default:
-            jj_la1[15] = jj_gen;
+            jj_la1[13] = jj_gen;
             ;
           }
         }
         break;
       default:
-        jj_la1[16] = jj_gen;
+        jj_la1[14] = jj_gen;
         ;
       }
     } catch (Throwable jjte000) {
@@ -647,7 +629,7 @@ public class GameMonkeyParser/*@bgen(jjtree)*/implements GameMonkeyParserTreeCon
         jj_consume_token(MEMBER);
         break;
       default:
-        jj_la1[17] = jj_gen;
+        jj_la1[15] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -692,7 +674,7 @@ public class GameMonkeyParser/*@bgen(jjtree)*/implements GameMonkeyParserTreeCon
         jj_consume_token(INTEGER_LITERAL);
         break;
       default:
-        jj_la1[18] = jj_gen;
+        jj_la1[16] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -717,21 +699,24 @@ public class GameMonkeyParser/*@bgen(jjtree)*/implements GameMonkeyParserTreeCon
     finally { jj_save(1, xla); }
   }
 
-  private boolean jj_2_3(int xla) {
-    jj_la = xla; jj_lastpos = jj_scanpos = token;
-    try { return !jj_3_3(); }
-    catch(LookaheadSuccess ls) { return true; }
-    finally { jj_save(2, xla); }
+  private boolean jj_3R_9() {
+    if (jj_scan_token(IDENTIFIER)) return true;
+    if (jj_3R_13()) return true;
+    return false;
   }
 
-  private boolean jj_2_4(int xla) {
-    jj_la = xla; jj_lastpos = jj_scanpos = token;
-    try { return !jj_3_4(); }
-    catch(LookaheadSuccess ls) { return true; }
-    finally { jj_save(3, xla); }
+  private boolean jj_3R_13() {
+    if (jj_scan_token(ASSIGN)) return true;
+    return false;
   }
 
-  private boolean jj_3R_14() {
+  private boolean jj_3R_25() {
+    if (jj_scan_token(FUNCTION)) return true;
+    if (jj_scan_token(LPAREN)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_12() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(12)) {
@@ -744,95 +729,141 @@ public class GameMonkeyParser/*@bgen(jjtree)*/implements GameMonkeyParserTreeCon
     return false;
   }
 
-  private boolean jj_3R_21() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3_2()) {
-    jj_scanpos = xsp;
-    if (jj_3R_22()) return true;
-    }
+  private boolean jj_3R_27() {
+    if (jj_3R_6()) return true;
     return false;
   }
 
-  private boolean jj_3R_17() {
-    if (jj_scan_token(COMMA)) return true;
-    return false;
-  }
-
-  private boolean jj_3_3() {
-    if (jj_3R_9()) return true;
-    return false;
-  }
-
-  private boolean jj_3_4() {
-    if (jj_3R_8()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_19() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3_3()) {
-    jj_scanpos = xsp;
-    if (jj_3R_21()) return true;
-    }
-    return false;
-  }
-
-  private boolean jj_3R_16() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_18()) {
-    jj_scanpos = xsp;
-    if (jj_3R_19()) return true;
-    }
-    return false;
-  }
-
-  private boolean jj_3R_18() {
-    if (jj_3R_20()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_15() {
+  private boolean jj_3R_14() {
     if (jj_scan_token(DOT)) return true;
     if (jj_scan_token(IDENTIFIER)) return true;
     return false;
   }
 
-  private boolean jj_3R_12() {
-    if (jj_3R_16()) return true;
+  private boolean jj_3R_24() {
     Token xsp;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3R_17()) { jj_scanpos = xsp; break; }
-    }
-    return false;
-  }
-
-  private boolean jj_3R_9() {
-    if (jj_scan_token(IDENTIFIER)) return true;
-    if (jj_3R_13()) return true;
+    xsp = jj_scanpos;
+    if (jj_3R_27()) jj_scanpos = xsp;
     return false;
   }
 
   private boolean jj_3R_8() {
-    if (jj_3R_11()) return true;
-    if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_12()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_26() {
+    if (jj_3R_10()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_6() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_8()) jj_scanpos = xsp;
+    if (jj_3R_9()) return true;
+    return false;
+  }
+
+  private boolean jj_3_2() {
+    if (jj_3R_7()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_7() {
+    if (jj_3R_10()) return true;
+    if (jj_scan_token(LPAREN)) return true;
+    if (jj_3R_11()) return true;
     if (jj_scan_token(RPAREN)) return true;
     return false;
   }
 
-  private boolean jj_3R_11() {
-    if (jj_scan_token(IDENTIFIER)) return true;
+  private boolean jj_3R_22() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3R_15()) jj_scanpos = xsp;
+    if (jj_3_2()) {
+    jj_scanpos = xsp;
+    if (jj_3R_26()) return true;
+    }
+    return false;
+  }
+
+  private boolean jj_3R_21() {
+    if (jj_3R_25()) return true;
     return false;
   }
 
   private boolean jj_3R_20() {
+    if (jj_scan_token(LBRACE)) return true;
+    if (jj_3R_24()) return true;
+    if (jj_scan_token(RBRACE)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_10() {
+    if (jj_scan_token(IDENTIFIER)) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_14()) jj_scanpos = xsp;
+    return false;
+  }
+
+  private boolean jj_3R_18() {
+    if (jj_3R_11()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_17() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_19()) {
+    jj_scanpos = xsp;
+    if (jj_3R_20()) {
+    jj_scanpos = xsp;
+    if (jj_3R_21()) {
+    jj_scanpos = xsp;
+    if (jj_3R_22()) return true;
+    }
+    }
+    }
+    return false;
+  }
+
+  private boolean jj_3R_19() {
+    if (jj_3R_23()) return true;
+    return false;
+  }
+
+  private boolean jj_3_1() {
+    if (jj_3R_6()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_16() {
+    if (jj_scan_token(LPAREN)) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_18()) jj_scanpos = xsp;
+    if (jj_scan_token(RPAREN)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_15() {
+    if (jj_3R_17()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_11() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_15()) {
+    jj_scanpos = xsp;
+    if (jj_3R_16()) return true;
+    }
+    return false;
+  }
+
+  private boolean jj_3R_23() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(44)) {
@@ -848,39 +879,6 @@ public class GameMonkeyParser/*@bgen(jjtree)*/implements GameMonkeyParserTreeCon
     return false;
   }
 
-  private boolean jj_3_1() {
-    if (jj_3R_7()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_13() {
-    if (jj_scan_token(ASSIGN)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_22() {
-    if (jj_3R_11()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_10() {
-    if (jj_3R_14()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_7() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_10()) jj_scanpos = xsp;
-    if (jj_3R_9()) return true;
-    return false;
-  }
-
-  private boolean jj_3_2() {
-    if (jj_3R_8()) return true;
-    return false;
-  }
-
   /** Generated Token Manager. */
   public GameMonkeyParserTokenManager token_source;
   JavaCharStream jj_input_stream;
@@ -892,7 +890,7 @@ public class GameMonkeyParser/*@bgen(jjtree)*/implements GameMonkeyParserTreeCon
   private Token jj_scanpos, jj_lastpos;
   private int jj_la;
   private int jj_gen;
-  final private int[] jj_la1 = new int[19];
+  final private int[] jj_la1 = new int[17];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static private int[] jj_la1_2;
@@ -904,18 +902,18 @@ public class GameMonkeyParser/*@bgen(jjtree)*/implements GameMonkeyParserTreeCon
       jj_la1_init_3();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x7000,0x0,0x7000,0x0,0x0,0x0,0x0,0x0,0x7000,0x0,0x0,0x7000,0x0,0x8000,0x0,0x7000,0x7000,0x7000,0x0,};
+      jj_la1_0 = new int[] {0x7000,0x0,0x7000,0x0,0x7000,0x0,0x0,0x7000,0x8000,0x8000,0x0,0x8000,0x0,0x7000,0x7000,0x7000,0x0,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x82000,0x2000,0x82000,0x2000000,0x1000000,0x2000,0x2000,0x3844,0x0,0x2000,0x1000000,0x82000,0x2000,0x83844,0x1000000,0x2000,0x2000,0x0,0x1844,};
+      jj_la1_1 = new int[] {0x82000,0x2000,0x82000,0x2000000,0x0,0x2000,0x1000000,0x82000,0xa3844,0xa3844,0x2000,0x83844,0x1000000,0x2000,0x2000,0x0,0x1844,};
    }
    private static void jj_la1_init_2() {
-      jj_la1_2 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_2 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
    private static void jj_la1_init_3() {
-      jj_la1_3 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_3 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
-  final private JJCalls[] jj_2_rtns = new JJCalls[4];
+  final private JJCalls[] jj_2_rtns = new JJCalls[2];
   private boolean jj_rescan = false;
   private int jj_gc = 0;
 
@@ -930,7 +928,7 @@ public class GameMonkeyParser/*@bgen(jjtree)*/implements GameMonkeyParserTreeCon
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 19; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 17; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -946,7 +944,7 @@ public class GameMonkeyParser/*@bgen(jjtree)*/implements GameMonkeyParserTreeCon
     jj_ntk = -1;
     jjtree.reset();
     jj_gen = 0;
-    for (int i = 0; i < 19; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 17; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -957,7 +955,7 @@ public class GameMonkeyParser/*@bgen(jjtree)*/implements GameMonkeyParserTreeCon
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 19; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 17; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -969,7 +967,7 @@ public class GameMonkeyParser/*@bgen(jjtree)*/implements GameMonkeyParserTreeCon
     jj_ntk = -1;
     jjtree.reset();
     jj_gen = 0;
-    for (int i = 0; i < 19; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 17; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -979,7 +977,7 @@ public class GameMonkeyParser/*@bgen(jjtree)*/implements GameMonkeyParserTreeCon
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 19; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 17; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -990,7 +988,7 @@ public class GameMonkeyParser/*@bgen(jjtree)*/implements GameMonkeyParserTreeCon
     jj_ntk = -1;
     jjtree.reset();
     jj_gen = 0;
-    for (int i = 0; i < 19; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 17; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -1107,7 +1105,7 @@ public class GameMonkeyParser/*@bgen(jjtree)*/implements GameMonkeyParserTreeCon
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 19; i++) {
+    for (int i = 0; i < 17; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
@@ -1152,7 +1150,7 @@ public class GameMonkeyParser/*@bgen(jjtree)*/implements GameMonkeyParserTreeCon
 
   private void jj_rescan_token() {
     jj_rescan = true;
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 2; i++) {
     try {
       JJCalls p = jj_2_rtns[i];
       do {
@@ -1161,8 +1159,6 @@ public class GameMonkeyParser/*@bgen(jjtree)*/implements GameMonkeyParserTreeCon
           switch (i) {
             case 0: jj_3_1(); break;
             case 1: jj_3_2(); break;
-            case 2: jj_3_3(); break;
-            case 3: jj_3_4(); break;
           }
         }
         p = p.next;
